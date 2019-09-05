@@ -77,7 +77,20 @@ axios.get('https://api.github.com/users/mxxt1')
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['lfritze','jnmendza','darrenjcarillo','zeravenyoej','seanaleid', 'vishalicious', 'baopham92','mrt3313','kukicako'];
+
+followersArray.forEach(item =>{
+  axios.get(`https://api.github.com/users/${item}`)
+  .then(response =>{
+    console.log(`Api Returned: `,response);
+    const arrCard = makeUserCard(response.data);
+    cardContainer.appendChild(arrCard);
+  })
+  .catch(error =>{
+    console.log(`Error: `,error);
+  })
+})
+
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -146,11 +159,11 @@ infoContainer.appendChild(bio);
 cardImg.src = obj.avatar_url;
 realName.textContent = obj.name;
 userName.textContent = obj.login;
-location.textContent = obj.location;
-gitLink.textContent = obj.html_url;
-followers.textContent = obj.followers;
-following.textContent = obj.following;
-bio.textContent = obj.bio;
+location.textContent = `Location:  ${obj.location}`;
+gitLink.textContent = `Profile:  ${obj.html_url}`;
+followers.textContent = `Followers:  ${obj.followers}`;
+following.textContent = `Following:  ${obj.following}`;
+bio.textContent = `Bio:  ${obj.bio}`;
 
 //event listener
 
