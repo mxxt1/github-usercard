@@ -77,7 +77,7 @@ axios.get('https://api.github.com/users/mxxt1')
           user, and adding that card to the DOM.
 */
 
-const followersArray = ['lfritze','jnmendza','darrenjcarillo','zeravenyoej','seanaleid', 'vishalicious', 'baopham92','mrt3313','kukicako'];
+const followersArray = ['lfritze','jnmendza','darrenjcarrillo','zeravenyoej','seanaleid', 'vishalicious213', 'baopham92','mrt3313','kukicako'];
 
 followersArray.forEach(item =>{
   axios.get(`https://api.github.com/users/${item}`)
@@ -139,9 +139,25 @@ infoContainer.classList.add('card-info');
 realName.classList.add('name');
 userName.classList.add('username');
 
+
+
+
+//assign values
+
+cardImg.src = obj.avatar_url;
+realName.textContent = obj.name;
+userName.textContent = obj.login;
+location.textContent = `Location:  ${obj.location}`;
+gitLink.href = obj.html_url;
+gitLink.textContent = obj.html_url;
+console.log(gitLink);
+profile.textContent = `Profile: `;
+followers.textContent = `Followers:  ${obj.followers}`;
+following.textContent = `Following:  ${obj.following}`;
+bio.textContent = `Bio:  ${obj.bio}`;
+
 //setup structure
 
-// cardContainer.appendChild(card);
 card.appendChild(cardImg);
 card.appendChild(infoContainer);
 infoContainer.appendChild(realName);
@@ -153,17 +169,6 @@ infoContainer.appendChild(followers);
 infoContainer.appendChild(following);
 infoContainer.appendChild(bio);
 
-
-//assign values
-
-cardImg.src = obj.avatar_url;
-realName.textContent = obj.name;
-userName.textContent = obj.login;
-location.textContent = `Location:  ${obj.location}`;
-gitLink.textContent = `Profile:  ${obj.html_url}`;
-followers.textContent = `Followers:  ${obj.followers}`;
-following.textContent = `Following:  ${obj.following}`;
-bio.textContent = `Bio:  ${obj.bio}`;
 
 //event listener
 
