@@ -6,6 +6,9 @@
 axios.get('https://api.github.com/users/mxxt1')
 .then(response =>{
   console.log(`API Response: `,response);
+})
+.catch(error =>{
+  console.log(`Error `,error);
 });
 
 
@@ -53,6 +56,17 @@ axios.get('https://api.github.com/users/mxxt1')
            create a new component and add it to the DOM as a child of .cards
 */
 
+
+axios.get('https://api.github.com/users/mxxt1')
+.then(response =>{
+  console.log(`recieved: `,response);
+  const newCard = makeUserCard(response.data);
+  cardContainer.appendChild(newCard);
+})
+.catch(error => {
+  console.log(error)
+})
+
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
           , manually find some other users' github handles, or use the list found 
@@ -84,6 +98,68 @@ const followersArray = [];
 </div>
 
 */
+//card container
+const cardContainer = document.querySelector('.cards');
+
+function makeUserCard(obj){
+//create elements
+const card = document.createElement('div');//.card append to cardContainer
+  const cardImg = document.createElement('img');// append to card
+  const infoContainer = document.createElement('div')//.card-info append to card
+
+    const realName = document.createElement('h3');//.name append to infoContainer
+    const userName = document.createElement('p');//.username "" infoContainer
+    const location = document.createElement('p');// "" infoContainer
+    
+    const profile = document.createElement('p');//"" infoContainer
+      const gitLink = document.createElement('a');//append to profile
+
+    const followers = document.createElement('p');//append to infoContainer
+    const following = document.createElement('p');//append to infoContainer
+    const bio = document.createElement('p');//append to infoContainer
+
+
+//setup class names
+
+card.classList.add('card');
+infoContainer.classList.add('card-info');
+realName.classList.add('name');
+userName.classList.add('username');
+
+//setup structure
+
+// cardContainer.appendChild(card);
+card.appendChild(cardImg);
+card.appendChild(infoContainer);
+infoContainer.appendChild(realName);
+infoContainer.appendChild(userName);
+infoContainer.appendChild(location);
+infoContainer.appendChild(profile);
+profile.appendChild(gitLink);
+infoContainer.appendChild(followers);
+infoContainer.appendChild(following);
+infoContainer.appendChild(bio);
+
+
+//assign values
+
+cardImg.src = obj.avatar_url;
+realName.textContent = obj.name;
+userName.textContent = obj.login;
+location.textContent = obj.location;
+gitLink.textContent = obj.html_url;
+followers.textContent = obj.followers;
+following.textContent = obj.following;
+bio.textContent = obj.bio;
+
+//event listener
+
+//return parent
+
+return card;
+}
+
+
 
 /* List of LS Instructors Github username's: 
   tetondan
